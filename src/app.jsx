@@ -1,14 +1,34 @@
 class IndecisionApp extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
+    this.handlePick = this.handlePick.bind(this)
+    this.state = {
+      options: ["Thing one", "Thing two", "Thing three"]
+    }
+  }
+  handlePick() {
+    const randomNum = Math.floor(Math.random() * this.state.options.length)
+    alert(this.state.options[randomNum])
+  }
+  handleDeleteOptions() {
+    this.setState(() => {
+      return {
+        options: []
+      }
+    })
+  }
   render() {
     const title = "Indecision"
     const subtitle = "Put your life in the hands of a computer"
-    const options = ["Thing one", "Thing two", "Thing three"]
 
     return (
       <div>
         <Header title={ title } subtitle={ subtitle } />
-        <Action />
-        <Options options={ options } />
+        <Action hasOptions={ this.state.options.length > 0 }
+        handlePick={this.handlePick} />
+        <Options options={ this.state.options }
+        handleDeleteOptions={this.handleDeleteOptions} />
         <AddOption />
       </div>
     )
@@ -27,26 +47,21 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
-  handlePick() {
-    alert("handlePick");
-  }
   render() {
     return (
       <div>
-        <button onClick={ this.handlePick }>What should I do?</button>
+        <button onClick={ this.props.handlePick } disabled={ !this.props.hasOptions }>
+          What should I do?</button>
       </div>
     )
   }
 }
 
 class Options extends React.Component {
-  handleRemoveAll() {
-    alert("handleRemoveAll")
-  }
   render() {
     return (
       <div>
-        <button onClick={ this.handleRemoveAll }>Reset all</button>
+        <button onClick={ this.props.handleDeleteOptions }>Reset all</button>
         <ol>
           { [this.props.options.map((option) => <Option key={ option } optionText={ option } />)] }
         </ol>
