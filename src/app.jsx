@@ -47,60 +47,52 @@ class IndecisionApp extends React.Component {
   }
 }
 
-class Header extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>{ this.props.title }</h1>
-        <h2>{ this.props.subtitle }</h2>
-      </div>
-    )
-  }
-}
+const Header = (props) => {
+  return (
+    <div>
+      <h1>{ props.title }</h1>
+      <h2>{ props.subtitle }</h2>
+    </div>
+  )
+};
 
-class Action extends React.Component {
-  render() {
-    return (
-      <div>
-        <button onClick={ this.props.handlePick } disabled={ !this.props.hasOptions }>
-          What should I do?</button>
-      </div>
-    )
-  }
-}
+const Action = (props) => {
+  return (
+    <div>
+      <button onClick={ props.handlePick } disabled={ !props.hasOptions }>
+        What should I do?</button>
+    </div>
+  )
+};
 
-class Options extends React.Component {
-  render() {
-    return (
-      <div>
-        <button onClick={ this.props.handleDeleteOptions }>Reset all</button>
-        <ol>
-          { [this.props.options.map((option) => <Option key={ option } optionText={ option } />)] }
-        </ol>
-      </div>
-    )
-  }
-}
+const Options = (props) => {
+  return (
+    <div>
+      <button onClick={ props.handleDeleteOptions }>Reset all</button>
+      <ol>
+        { [props.options.map((option) => <Option key={ option } optionText={ option } />)] }
+      </ol>
+    </div>
+  )
+};
 
-class Option extends React.Component {
-  render() {
-    return (
-      <li>
-        { this.props.optionText }
-      </li>
-    )
-  }
-}
+const Option = (props) => {
+  return (
+    <li>
+      { props.optionText }
+    </li>
+  )
+};
 
 class AddOption extends React.Component {
   constructor(props) {
     super(props)
-    this.childHandleAddOption = this.childHandleAddOption.bind(this)
+    this.handleAddOption = this.handleAddOption.bind(this)
     this.state = {
       error: undefined
     }
   }
-  childHandleAddOption(e) {
+  handleAddOption(e) {
     e.preventDefault()
 
     const option = e.target.elements.option.value.trim()
@@ -118,7 +110,7 @@ class AddOption extends React.Component {
         { this.state.error && <p>
                                 { this.state.error }
                               </p> }
-        <form onSubmit={ this.childHandleAddOption }>
+        <form onSubmit={ this.handleAddOption }>
           <input type="text" name="option" />
           <button>Add Option</button>
         </form>
