@@ -1,9 +1,10 @@
 class IndecisionApp extends React.Component {
   constructor(props) {
     super(props)
-    this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
-    this.handlePick = this.handlePick.bind(this)
-    this.handleAddOption = this.handleAddOption.bind(this)
+    this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
+    this.handlePick = this.handlePick.bind(this);
+    this.handleAddOption = this.handleAddOption.bind(this);
+    this.handleDeleteOption = this.handleDeleteOption.bind(this);
     this.state = {
       options: props.options
     }
@@ -15,6 +16,11 @@ class IndecisionApp extends React.Component {
   handleDeleteOptions() {
     this.setState(() => ({
       options: []
+    }));
+  }
+  handleDeleteOption(optionToDelete) {
+    this.setState((prevState) => ({
+      options: prevState.options.filter((option) => optionToDelete != option)
     }));
   }
   handleAddOption(option) {
@@ -35,7 +41,7 @@ class IndecisionApp extends React.Component {
       <div>
         <Header subtitle={ subtitle } />
         <Action hasOptions={ this.state.options.length > 0 } handlePick={ this.handlePick } />
-        <Options options={ this.state.options } handleDeleteOptions={ this.handleDeleteOptions } />
+        <Options options={ this.state.options } handleDeleteOptions={ this.handleDeleteOptions } handleDeleteOption={ this.handleDeleteOption } />
         <AddOption handleAddOption={ this.handleAddOption } />
       </div>
     )
@@ -74,7 +80,7 @@ const Options = (props) => {
     <div>
       <button onClick={ props.handleDeleteOptions }>Reset all</button>
       <ol>
-        { [props.options.map((option) => <Option key={ option } optionText={ option } />)] }
+        { props.options.map((option) => <Option key={ option } optionText={ option } handleDeleteOption={ props.handleDeleteOption } />) }
       </ol>
     </div>
   )
@@ -84,6 +90,7 @@ const Option = (props) => {
   return (
     <li>
       { props.optionText }
+      <button onClick={ (e) => props.handleDeleteOption(props.optionText) }>remove</button>
     </li>
   )
 };
