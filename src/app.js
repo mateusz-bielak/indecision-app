@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import IndecisionApp from './components/IndecisionApp.js';
 
-const template = <p>This is JSX</p>;
-ReactDOM.render(template, document.querySelector('#app'));
+ReactDOM.render(<IndecisionApp />, document.querySelector("#app"));
