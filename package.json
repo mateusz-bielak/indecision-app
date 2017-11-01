@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "live-server public/",
     "build": "webpack",
-    "dev-server": "webpack-dev-server"
+    "dev-server": "webpack-dev-server --open"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "live-server": "^1.2.0",
     "react": "16.0.0",
     "react-dom": "16.0.0",
+    "react-modal": "^3.1.0",
     "validator": "^9.1.1",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3"
