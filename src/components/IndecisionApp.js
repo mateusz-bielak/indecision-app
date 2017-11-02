@@ -8,12 +8,14 @@ import OptionModal from './OptionModal.js';
 class IndecisionApp extends React.Component {
   state = {
     options: [],
+    openModal: undefined,
     selectedOption: undefined
   };
   handlePick = () => {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const option = this.state.options[randomNum];
     this.setState(() => ({
+      openModal: true,
       selectedOption: option
     }));
   };
@@ -39,8 +41,10 @@ class IndecisionApp extends React.Component {
   };
   closeModal = () => {
     this.setState(() => ({
-      selectedOption: false
+      openModal: false
     }));
+    setTimeout(() => {
+      this.setState(() => ({selectedOption: false}))}, 200);
   };
   componentDidMount() {
     try {
@@ -74,7 +78,7 @@ class IndecisionApp extends React.Component {
             <AddOption handleAddOption={ this.handleAddOption } />
           </div>
         </div>
-        <OptionModal selectedOption={ this.state.selectedOption } closeModal={ this.closeModal } />
+        <OptionModal openModal={this.state.openModal} selectedOption={ this.state.selectedOption } closeModal={ this.closeModal } />
       </div>
     )
   }
