@@ -6,9 +6,14 @@ Bundle.js is not prepared for production so far.
 
 ### Usage
 ```
-npm run build - create bundle.js in public folder
 npm run dev-server - run app
 open http://localhost:8080/
+```
+
+You can also prepared bundle.js in the public folder
+```
+npm run build
+npm run serve
 ```
 
 This app is made during React course on Udemy platform.
