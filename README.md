@@ -1,6 +1,8 @@
-# Indecision App - To do list application which choose tasks for you
+# Indecision App
 
-## Usage
+## To do list application which choose tasks for you
+
+### Usage
 ```
 npm run build - create bundle.js in public folder
 npm run dev-server - run app
