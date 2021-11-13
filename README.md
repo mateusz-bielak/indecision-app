@@ -17,5 +17,3 @@ npm run serve
 ```
 
 This app is made during React course on Udemy platform.
-
-https://butseriously.github.io/indecision-app/ - click to see live.
